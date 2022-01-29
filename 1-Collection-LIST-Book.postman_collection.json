@@ -1,0 +1,140 @@
+{
+	"info": {
+		"_postman_id": "95b2a104-0afb-40e7-8e3c-56ffc0daf6f6",
+		"name": "1-Collection-LIST-Book",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Folder",
+			"item": [
+				{
+					"name": "https://www.googleapis.com/books/v1/volumes?q=massi&download=epub&projection=full",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test.skip(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"code of Body \", function () {\r",
+									"pm.response.to.have.jsonBody\r",
+									"});\r",
+									"pm.sendRequest(\"https://postman-echo.com/get\", function (err, response) {\r",
+									"    console.log(response.json());\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 600ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{v1}}?q=massi&download=epub",
+							"host": [
+								"{{v1}}"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "massi"
+								},
+								{
+									"key": "download",
+									"value": "epub"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{v1}}?q=massi&id=4k_zep9JRGgC",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Envi-prod\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Envi-Pré-prod\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Object is contained\", () => {\r",
+									"  const expectedObject = {\r",
+									"    \"authors\": true,\r",
+									"  }});\r",
+									"\r",
+									"  pm.test(\"Cookie JSESSIONID is present\", () => {\r",
+									"  pm.expect(pm.cookies.has('JSESSIONID')).to.be.false;\r",
+									"});\r",
+									"pm.test.skip(\"Cookie JSESSIONID is present\", () => {\r",
+									"  pm.expect(pm.cookies.has('JSESSIONID')).to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{v1}}?q=massi&id=4k_zep9JRGgC&authors=yasmina ",
+							"host": [
+								"{{v1}}"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "massi"
+								},
+								{
+									"key": "id",
+									"value": "4k_zep9JRGgC"
+								},
+								{
+									"key": "authors",
+									"value": "yasmina "
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
